@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import List
 
 from inventory_report.reports.simple_report import SimpleReport
 
@@ -9,7 +9,7 @@ class CompleteReport(SimpleReport):
     """
 
     @classmethod
-    def generate(cls, list: List[Dict]) -> str:
+    def generate(cls, list: List[dict]) -> str:
         """
         This method receives a list of dict's and transform into the complex
         report as string

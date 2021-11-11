@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Dict, List
+from typing import List
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -14,7 +14,7 @@ class SimpleReport:
     max_stock_name: str
     stock_count: dict = {}
 
-    def __parse_item(item: Dict) -> List[datetime, datetime, str]:
+    def __parse_item(item: dict) -> List[datetime, datetime, str]:
         """
         Simplify parsing and extraction fields method.
         """
@@ -25,7 +25,7 @@ class SimpleReport:
         return man_date, exp_date, com_name
 
     @classmethod
-    def generate(cls, list: List[Dict]) -> str:  # noqa: C901
+    def generate(cls, list: List[dict]) -> str:  # noqa: C901
         """
         This method receives a list of dict's and transform into the simple
         report as string
