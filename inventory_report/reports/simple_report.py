@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import List
+from typing import List, Tuple
 
 DATE_FORMAT = "%Y-%m-%d"
 
@@ -14,7 +14,7 @@ class SimpleReport:
     max_stock_name: str
     stock_count: dict = {}
 
-    def __parse_item(item: dict) -> List[datetime, datetime, str]:
+    def __parse_item(item: dict) -> Tuple[datetime, datetime, str]:
         """
         Simplify parsing and extraction fields method.
         """
@@ -45,16 +45,16 @@ class SimpleReport:
         cls.stock_count = {f"{cls.max_stock_name}": 1}
 
         # compare all items to find values of report
-        for i, item in enumerate(data[1:]):
+        for item in data[1:]:
             man_date, exp_date, com_name = cls.__parse_item(item)
 
             # check oldest manufactury date
             if man_date < cls.oldest_man_date:
                 cls.oldest_man_date = man_date
 
-            # check closest expiration date
-            if exp_date > cls.closest_exp_date:
-                SimpleReport.closest_exp_date = exp_date
+            # check closest expiration date (only non expired items)
+            if datetime.now() < exp_date < cls.closest_exp_date:
+                cls.closest_exp_date = exp_date
 
             # count items of company
             cls.stock_count[com_name] = cls.stock_count.get(com_name, 0) + 1
