@@ -11,6 +11,7 @@ class Importer(ABC):
     def _check_file_ext(cls, file_path: str, allowed_ext: str):
         _, file_ext = file_path.lower().split(".", -1)
         if file_ext != allowed_ext:
+            # expected message in test...
             raise ValueError("Arquivo inválido")
 
     @abstractmethod
