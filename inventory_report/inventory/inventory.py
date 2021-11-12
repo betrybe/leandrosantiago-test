@@ -10,35 +10,26 @@ class Inventory:
     Class used to read file and print simple or complex report
     """
 
-    def import_data(self, path: str, report_type: str) -> str:  # noqa: C901
+    importers = {"csv": CsvImporter, "json": JsonImporter, "xml": XmlImporter}
+    reports = {"simples": SimpleReport, "completo": CompleteReport}
+
+    @classmethod
+    def import_data(cls, file_path: str, report_type: str) -> str:
         """
         Read content of file and use specific importer based on file extension
         to generate the simple or complex report
         """
         # get file extension
-        _, file_ext = path.lower().split("." - 1)
+        _, file_ext = file_path.lower().split(".", -1)
 
         # check which importer will be used
-        if file_ext == "csv":
-            importer = CsvImporter()
-        elif file_ext == "json":
-            importer = JsonImporter()
-        elif file_ext == "xml":
-            importer = XmlImporter()
-        else:
-            raise TypeError(f"The extension '{file_ext}' is not valid.")
+        importer = cls.importers[file_ext]
 
         # check which report will be generated
-        if report_type == "simples":
-            report_generator = SimpleReport
-        elif report_type == "completo":
-            report_generator = CompleteReport
-        else:
-            raise TypeError(f"The report option '{report_type}' is no valid.")
+        report = cls.reports[report_type]
 
         # import data from file path
-        data = importer.import_data(path)
+        data = importer.import_data(file_path)
 
         # generate and return report
-        report = report_generator.generate(data)
-        return report
+        return report.generate(data)
