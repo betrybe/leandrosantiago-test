@@ -10,7 +10,7 @@ class XmlImporter(Importer):
     """
 
     @classmethod
-    def import_data(cls, file_path: str) -> List[dict]:  # noqa: C901
+    def import_data(cls, file_path: str) -> List[dict]:
         """
         Method to import xml file and parse
         """
