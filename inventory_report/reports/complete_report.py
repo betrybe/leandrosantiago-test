@@ -9,13 +9,13 @@ class CompleteReport(SimpleReport):
     """
 
     @classmethod
-    def generate(cls, list: List[dict]) -> str:
+    def generate(cls, data: List[dict]) -> str:
         """
         This method receives a list of dict's and transform into the complex
         report as string
         """
         # complete report contains the simple report.
-        complex_report = super().generate(list)
+        complex_report = super().generate(data)
 
         # add a space and header of stock count list
         complex_report += "\n\nProdutos estocados por empresa:\n"

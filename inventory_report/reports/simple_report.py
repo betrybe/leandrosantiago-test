@@ -25,13 +25,13 @@ class SimpleReport:
         return man_date, exp_date, com_name
 
     @classmethod
-    def generate(cls, list: List[dict]) -> str:  # noqa: C901
+    def generate(cls, data: List[dict]) -> str:  # noqa: C901
         """
         This method receives a list of dict's and transform into the simple
         report as string
         """
         # need some item to print report
-        if not list or len(list) < 1:
+        if not data or len(data) < 1:
             raise ValueError("Can't generate report without data.")
 
         # to print index of item if throw
@@ -43,13 +43,13 @@ class SimpleReport:
                 cls.oldest_man_date,
                 cls.closest_exp_date,
                 cls.max_stock_name,
-            ) = cls.__parse_item(list[i])
+            ) = cls.__parse_item(data[i])
 
             # restart stock_count and count 1 item for first company
             cls.stock_count = {f"{cls.max_stock_name}": 1}
 
             # compare all items to find values of report
-            for i, item in enumerate(list[1:]):
+            for i, item in enumerate(data[1:]):
                 man_date, exp_date, com_name = cls.__parse_item(item)
 
                 # check oldest manufactury date
