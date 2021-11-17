@@ -1,8 +1,5 @@
-import sys
 from unittest.mock import patch
-
-import pytest
-
+import sys
 from inventory_report.main import main
 
 
@@ -104,3 +101,5 @@ def test_validar_menu_com_menos_argumentos(capsys):
         print(err)
         out, err = capsys.readouterr()
         assert "Verifique os argumentos" in err
+
+        
