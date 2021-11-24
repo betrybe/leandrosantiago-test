@@ -104,5 +104,3 @@ def test_validar_menu_com_menos_argumentos(capsys):
         print(err)
         _, err = capsys.readouterr()
         assert "Verifique os argumentos" in err
-
-        
