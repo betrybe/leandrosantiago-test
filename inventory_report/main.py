@@ -27,4 +27,4 @@ def main():
     result = inventory.import_data(file_path, report_type)
 
     # and print
-    print(result)
+    print(result, end="")

@@ -10,7 +10,6 @@ simple_out = (
     "Data de validade mais próxima: 2022-09-17\n"
     "Empresa com maior quantidade de produtos estocados: "
     "Target Corporation\n"
-    "\n"  # <- aqui está o erro
 )
 
 complete_out = (
@@ -24,7 +23,6 @@ complete_out = (
     "- Cantrell Drug Company: 2\n"
     "- Moore Medical LLC: 1\n"
     "- REMEDYREPACK: 1\n"
-    "\n"  # <- aqui está o erro
 )
 
 
