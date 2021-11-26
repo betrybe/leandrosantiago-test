@@ -1,6 +1,6 @@
 {
-    "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
     "editor.formatOnType": true,
     "editor.detectIndentation": false,
     "editor.tabSize": 4,
@@ -21,11 +21,4 @@
         "-l 79"
     ],
     "python.formatting.provider": "black",
-    "[python]": {
-        "editor.formatOnSave": false,
-        "gitlens.codeLens.symbolScopes": [
-            "!Module"
-        ],
-        "editor.wordBasedSuggestions": false
-    }
 }

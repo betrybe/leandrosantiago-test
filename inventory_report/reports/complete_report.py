@@ -15,10 +15,10 @@ class CompleteReport(SimpleReport):
         report as string
         """
         # complete report contains the simple report.
-        complex_report = super().generate(data)
+        complex_report = super().generate(data) + '\n'
 
         # add a space and header of stock count list
-        complex_report += "\nProdutos estocados por empresa: \n"
+        complex_report += "Produtos estocados por empresa: \n"
 
         # build stock count list
         for company_name, stock_count in cls.stock_count.items():

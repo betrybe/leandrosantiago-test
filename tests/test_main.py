@@ -5,17 +5,35 @@ import pytest
 
 from inventory_report.main import main
 
+simple_out = (
+    "Data de fabricação mais antiga: 2019-09-06\n"
+    "Data de validade mais próxima: 2022-09-17\n"
+    "Empresa com maior quantidade de produtos estocados: "
+    "Target Corporation\n"
+    "\n"  # <- aqui está o erro
+)
+
+complete_out = (
+    "Data de fabricação mais antiga: 2019-09-06\n"
+    "Data de validade mais próxima: 2022-09-17\n"
+    "Empresa com maior quantidade de produtos estocados: "
+    "Target Corporation\n\n"
+    "Produtos estocados por empresa: \n"
+    "- Target Corporation: 4\n"
+    "- Galena Biopharma: 2\n"
+    "- Cantrell Drug Company: 2\n"
+    "- Moore Medical LLC: 1\n"
+    "- REMEDYREPACK: 1\n"
+    "\n"  # <- aqui está o erro
+)
+
 
 def test_validar_menu_enviar_um_arquivo_csv_simples(capsys):
     args = ["0", "inventory_report/data/inventory.csv", "simples"]
     with patch.object(sys, "argv", args):
         main()
     out, _ = capsys.readouterr()
-
-    assert "Data de fabricação mais antiga: 2019-09-06\n" in out
-    assert "Data de validade mais próxima: 2022-09-17\n" in out
-    assert "Empresa com maior quantidade de produtos estocados: " in out
-    assert "Target Corporation\n" in out
+    assert simple_out == out
 
 
 def test_validar_menu_enviar_um_arquivo_csv_completo(capsys):
@@ -23,17 +41,7 @@ def test_validar_menu_enviar_um_arquivo_csv_completo(capsys):
     with patch.object(sys, "argv", args):
         main()
     out, _ = capsys.readouterr()
-
-    assert "Data de fabricação mais antiga: 2019-09-06\n" in out
-    assert "Data de validade mais próxima: 2022-09-17\n" in out
-    assert "Empresa com maior quantidade de produtos estocados: " in out
-    assert "Target Corporation\n\n" in out
-    assert "Produtos estocados por empresa: \n" in out
-    assert "- Target Corporation: 4\n" in out
-    assert "- Galena Biopharma: 2\n" in out
-    assert "- Cantrell Drug Company: 2\n" in out
-    assert "- Moore Medical LLC: 1\n" in out
-    assert "- REMEDYREPACK: 1\n" in out
+    assert complete_out == out
 
 
 def test_validar_menu_enviar_um_arquivo_json_simples(capsys):
@@ -41,11 +49,7 @@ def test_validar_menu_enviar_um_arquivo_json_simples(capsys):
     with patch.object(sys, "argv", args):
         main()
     out, _ = capsys.readouterr()
-
-    assert "Data de fabricação mais antiga: 2019-09-06\n" in out
-    assert "Data de validade mais próxima: 2022-09-17\n" in out
-    assert "Empresa com maior quantidade de produtos estocados: " in out
-    assert "Target Corporation\n" in out
+    assert simple_out == out
 
 
 def test_validar_menu_enviar_um_arquivo_json_completo(capsys):
@@ -53,17 +57,7 @@ def test_validar_menu_enviar_um_arquivo_json_completo(capsys):
     with patch.object(sys, "argv", args):
         main()
     out, _ = capsys.readouterr()
-
-    assert "Data de fabricação mais antiga: 2019-09-06\n" in out
-    assert "Data de validade mais próxima: 2022-09-17\n" in out
-    assert "Empresa com maior quantidade de produtos estocados: " in out
-    assert "Target Corporation\n\n" in out
-    assert "Produtos estocados por empresa: \n" in out
-    assert "- Target Corporation: 4\n" in out
-    assert "- Galena Biopharma: 2\n" in out
-    assert "- Cantrell Drug Company: 2\n" in out
-    assert "- Moore Medical LLC: 1\n" in out
-    assert "- REMEDYREPACK: 1\n" in out
+    assert complete_out == out
 
 
 def test_validar_menu_enviar_um_arquivo_xml_simples(capsys):
@@ -71,11 +65,7 @@ def test_validar_menu_enviar_um_arquivo_xml_simples(capsys):
     with patch.object(sys, "argv", args):
         main()
     out, _ = capsys.readouterr()
-
-    assert "Data de fabricação mais antiga: 2019-09-06\n" in out
-    assert "Data de validade mais próxima: 2022-09-17\n" in out
-    assert "Empresa com maior quantidade de produtos estocados: " in out
-    assert "Target Corporation\n" in out
+    assert simple_out == out
 
 
 def test_validar_menu_enviar_um_arquivo_xml_completo(capsys):
@@ -83,17 +73,7 @@ def test_validar_menu_enviar_um_arquivo_xml_completo(capsys):
     with patch.object(sys, "argv", args):
         main()
     out, _ = capsys.readouterr()
-
-    assert "Data de fabricação mais antiga: 2019-09-06\n" in out
-    assert "Data de validade mais próxima: 2022-09-17\n" in out
-    assert "Empresa com maior quantidade de produtos estocados: " in out
-    assert "Target Corporation\n\n" in out
-    assert "Produtos estocados por empresa: \n" in out
-    assert "- Target Corporation: 4\n" in out
-    assert "- Galena Biopharma: 2\n" in out
-    assert "- Cantrell Drug Company: 2\n" in out
-    assert "- Moore Medical LLC: 1\n" in out
-    assert "- REMEDYREPACK: 1\n" in out
+    assert complete_out == out
 
 
 def test_validar_menu_com_menos_argumentos(capsys):
@@ -101,6 +81,5 @@ def test_validar_menu_com_menos_argumentos(capsys):
         args = ["inventory_report/data/inventory.json", ""]
         with patch.object(sys, "argv", args):
             main()
-        print(err)
         _, err = capsys.readouterr()
-        assert "Verifique os argumentos" in err
+        assert err == "Verifique os argumentos\n"
