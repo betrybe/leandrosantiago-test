@@ -1,8 +1,6 @@
 import sys
 from unittest.mock import patch
 
-import pytest
-
 from inventory_report.main import main
 
 simple_out = (
@@ -75,9 +73,8 @@ def test_validar_menu_enviar_um_arquivo_xml_completo(capsys):
 
 
 def test_validar_menu_com_menos_argumentos(capsys):
-    with pytest.raises(Exception) as err:
-        args = ["inventory_report/data/inventory.json", ""]
-        with patch.object(sys, "argv", args):
-            main()
-        _, err = capsys.readouterr()
-        assert err == "Verifique os argumentos\n"
+    args = ["inventory_report/data/inventory.json", ""]
+    with patch.object(sys, "argv", args):
+        main()
+    _, err = capsys.readouterr()
+    assert err == "Verifique os argumentos\n"

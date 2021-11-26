@@ -10,7 +10,8 @@ def main():
     # check if have 2 arguments
     if len(sys.argv) != 3:
         # expected message in test...
-        raise Exception("Verifique os argumentos\n")
+        print("Verifique os argumentos", file=sys.stderr)
+        return
 
     _, file_path, report_type = sys.argv
 
